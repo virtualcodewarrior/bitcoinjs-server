@@ -35,6 +35,7 @@
     "binary": ">=0.3",
     "buffertools": ">=1.0.3",
     "bignum": ">=0.4.0",
+    "cryptocoin-base58": "0.1.x",
     "step": ">=0.0.4",
     "winston": ">=0.2.6",
     "irc": ">=0.2.1",
