@@ -54,6 +54,7 @@
   },
 
   "devDependencies": {
+    "memwatch": "0.2.x",
     "vows": ">=0.5.8",
     "ronn": ">=0.3.6"
   },
