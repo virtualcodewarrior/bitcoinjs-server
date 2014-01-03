@@ -1,4 +1,3 @@
-
 ## Proposed key/value schema
 
     block~[blockHash]~prevHash => [blockHash]
@@ -68,3 +67,12 @@ To properly sort by key, we can't just use integers in base-10 notation, since t
 So, we have to zero-pad on the front out to a given size. To reduce the number of characters used, the number can be expressed as hex, which still sorts alphabetically, since ASCII letters are after ASCII numbers. But Base-64 encoding wouldn't work well, since it encodes low numbers as capital letters, which come after the numbers in ASCII order. For the most compact use of space, without resorting to full binary strings which are sometimes hard to print, use the ASCII characters from 0x21 to 0x7e (94 characters) into a "base-94" representation. This would require big integer division to calculate, the same as Bitcoin's base-58 encoding. Therefore, `"!` (10) would be 94 (decimal), `"!!` (100) would be 8,836 (decimal), `"!!!` (1000) would be 830,584 (decimal), which is more than 3 times the current blockchain size.
 
 For representing block and transaction hashes, those are SHA256 hashes, so are 256 bits, so could be up to 2^256 in size. 94^39 just barely doesn't reach that, so 40 characters would be needed to represent a 256-bit number (compared to 64 hex characters).
+
+## Too Many Open Files
+One of the issues with the existing LevelDB implementation is some users experience hard faults from the filesystem for opening too many files at once. To solve that, if the key schema were designed such that commonly-accessed attributes were next to each other, then only one file would have to be opened to retrieve them. In that case, it might be better to have the transactions with their blocks?
+
+So instead of `txn~[txHash]~blah`, it could be `block~[blockHash]~txn~[txHash]~blah`. But each of those hashes would have to be at least 40 characters long, so that added 40 bytes to each transaction key. And you need to know the block the transaction is a part of, in order to look it up (so you'd also need `txn~[txHash] => block~[blockHash]`).
+
+Instead, you could do `txn~[txHash] => block~[blockHash]~txn~[index]`, and then `block~[blockHash]~txn~[index]~blah`. That replaces the `txHash` with an index value in the block, which is much shorter. Then if you know the hash of a transaction and want to look it up, look up `txn~[txHash]` to find out which block it's part of, and then fetch the data.
+
+Either way makes transaction lookups take two different lookups if you don't know the block/index the transaction is a part of, which is a worse solution if that's the primary way transactions are found.
