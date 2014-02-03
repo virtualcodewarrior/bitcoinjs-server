@@ -36,7 +36,7 @@
     "buffertools": "1.x",
     "bignum": ">=0.4.0",
     "bs58": "0.2.x",
-    "eckey": "0.3.x",
+    "eckey": "0.2.x",
     "step": ">=0.0.4",
     "winston": ">=0.2.6",
     "irc": ">=0.2.1",
