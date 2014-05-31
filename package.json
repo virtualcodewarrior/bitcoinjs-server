@@ -69,6 +69,6 @@
 
   "repository": {
     "type": "git",
-    "url": "git://github.com/bitcoinjs/bitcoinjs-server.git"
+    "url": "git://github.com/virtualcodewarrior/bitcoinjs-server.git"
   }
 }

@@ -24,7 +24,7 @@ against it.
 # Documentation
 
 Please visit the [BitcoinJS Server
-Wiki](https://github.com/bitcoinjs/bitcoinjs-server/wiki) on Github
+Wiki](https://github.com/virtualcodewarrior/bitcoinjs-server/wiki) on Github
 for documentation.
 
 There is also a built-in documentation system which you can access by
@@ -45,7 +45,7 @@ release.
 ### LevelDB
 
 LevelDB is the default database back end in BitcoinJS 0.2+. It is
-bundled with the `node-leveldb` NPM module and is therefore installed
+bundled with the `node-leveldown` NPM module and is therefore installed
 automatically. No manual steps should be necessary.
 
 ### MongoDB (deprecated)
@@ -68,20 +68,27 @@ how to query BitcoinJS in LevelDB mode, please refer to the wiki.
 
 ## Installation
 
-Once you have all prerequisites, this one-liner will install the
-latest version straight from NPM:
+Once you have all prerequisites,
+clone the latest version from git (the version in npm is outdated and will most likely fail to install because it depends on `node-leveldb` which is no longer actively developed) :
+
+``` sh
+# clone the git repo
+git clone https://github.com/virtualcodewarrior/bitcoinjs-server.git
+```
+
+Then install it by giving the following command from the bitcoinjs-server folder :
 
 ``` sh
 # Install BitcoinJS Server globally
-sudo npm install bitcoinjs -g
+sudo npm install -g
 ```
 
 Please refer to the wiki for detailed [installation
-instructions](https://github.com/bitcoinjs/bitcoinjs-server/wiki/Installation).
+instructions](https://github.com/virtualcodewarrior/bitcoinjs-server/wiki/Installation).
 
 If you run into problems, please take a look at the "Troubleshooting"
 section below or go to
-[Issues](https://github.com/bitcoinjs/bitcoinjs-server/issues) to open
+[Issues](https://github.com/virtualcodewarrior/bitcoinjs-server/issues) to open
 a new ticket.
 
 # Usage
@@ -140,7 +147,7 @@ to the code.
 
 For details on developing with BitcoinJS as a library, take a
 look at the Developer Guide on the
-[wiki](https://github.com/bitcoinjs/bitcoinjs-server/wiki).
+[wiki](https://github.com/virtualcodewarrior/bitcoinjs-server/wiki).
 
 
 # Upgrading
